@@ -1,71 +1,93 @@
 #include <iostream>
 #include <deque>
 
+#define MAX_SIZE 10000
+
 using namespace std;
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
 
-	int n;
-	cin >> n;
+    int n; //명령의 수
+    cin >> n;
 
-	deque<int> dq;
-	string input;
-	int num;
+    deque<int> dq; //덱 선언
 
-	while (n--) {
-		cin >> input;
+    //    f
+    //[ 0 1 2 3 4 5 ]
+    //            b
 
-		if (input == "push_front") {
-			cin >> num;
-			dq.push_front(num);
-		}
-		else if (input == "push_back") {
-			cin >> num;
-			dq.push_back(num);
-		}
-		else if (input == "pop_front") {
-			if (dq.empty()) {
-				cout << -1 << '\n';
-			}
-			else {
-				cout << dq.front() << '\n';
-				dq.pop_front();
-			}
-		}
-		else if (input == "pop_back") {
-			if (dq.empty()) {
-				cout << -1 << '\n';
-			}
-			else {
-				cout << dq.back() << '\n';
-				dq.pop_back();
-			}
-		}
-		else if (input == "size") {
-			cout << dq.size() << '\n';
-		}
-		else if (input == "empty") {
-			cout << dq.empty() << '\n';
-		}
-		else if (input == "front") {
-			if (dq.empty()) {
-				cout << -1 << '\n';
-			}
-			else {
-				cout << dq.front() << '\n';
-			}
-		}
-		else if (input == "back") {
-			if (dq.empty()) {
-				cout << -1 << '\n';
-			}
-			else {
-				cout << dq.back() << '\n';
-			}
-		}
-	}
+    string cmd;
+    int x;
 
-	return 0;
+    while (n--) {
+        cin >> cmd; //명령 입력
+
+        //push_front: 덱의 front에 x 삽입
+        if (cmd == "push_front") {
+            cin >> x;
+            dq.push_front(x);
+        }
+
+        //push_back: 덱의 back에 x 삽입
+        else if (cmd == "push_back") {
+            cin >> x;
+            dq.push_back(x);
+        }
+
+        //pop_front: 덱에서 front 원소 삭제하고 출력
+        else if (cmd == "pop_front") {
+            if (dq.empty()) { //덱이 비어 있을 시 -1 리턴
+                cout << "-1\n";
+            }
+            else {
+                cout << dq.front() << "\n";
+                dq.pop_front();
+            }
+        }
+
+        //pop_back: 덱에서 back 원소 삭제하고 출력
+        else if (cmd == "pop_back") {
+            if (dq.empty()) { //덱이 비어 있을 시 -1 리턴
+                cout << "-1\n";
+            }
+            else {
+                cout << dq.back() << "\n";
+                dq.pop_back();
+            }
+        }
+
+        //size: 덱의 크기 출력
+        else if (cmd == "size") {
+            cout << dq.size() << "\n";
+        }
+
+        //empty: 덱이 비어있는지 확인
+        else if (cmd == "empty") {
+            cout << dq.empty() << "\n";
+        }
+
+        //front: 덱의 front 출력
+        else if (cmd == "front") {
+            if (dq.empty()) { //덱이 비어 있을 시 -1 리턴
+                cout << "-1\n";
+            }
+            else {
+                cout << dq.front() << "\n";
+            }
+        }
+
+        //back: 덱의 back 출력
+        else if (cmd == "back") {
+            if (dq.empty()) { //덱이 비어 있을 시 -1 리턴
+                cout << "-1\n";
+            }
+            else {
+                cout << dq.back() << "\n";
+            }
+        }
+    }
+    
+    return 0;
 }
