@@ -1,48 +1,55 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 
 using namespace std;
 
-vector<int> josephus(const int& n, const int& k) {
-	queue<int> num;
-	vector<int> result;
+//요세푸스 순열 반환
+vector<int> josephus(int n, int k) { 
+    vector<int> result; //요세푸스 순열
+    queue<int> q; //원
 
-	for (int i = 1; i <= n; i++) {
-		num.push(i);
-	}
+    //원 초기화
+    for (int i = 1; i <= n; i++) { 
+        q.push(i);
+    }
 
-	while (!num.empty()) {
-		int cnt = k - 1;
-		while (cnt--) { //k-1보다 번호가 작은 사람은 큐에서 빼서 다시 뒤로 넣기
-			int t = num.front();
-			num.pop();
-			num.push(t);
-		}
-		result.push_back(num.front()); //k번째 사람은 결과 벡터에 넣기
-		num.pop();
-	}
+    while (!q.empty()) {
+        //k-1번 pop & push
+        for (int i = 0; i < k - 1; i++) { 
+            q.push(q.front());
+            q.pop();
+        }
 
-	return result;
+        //k번째 사람 pop 후 순열에 추가
+        result.push_back(q.front());
+        q.pop();
+    }
+
+    return result;
 }
 
+/*
+ * 원을 따라 k번째 사람을 제거한다.
+ * 1. k번째 사람이 아닌 사람은 원의 맨 뒤로 보낸다.
+ * 2. k번째 사람은 원에서 제거한다.
+*/
+
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+    int n, k;
+    queue<int> q;
 
-	//입력
-	int n, k;
-	cin >> n >> k;
+    //입력
+    cin >> n >> k;
 
-	//연산
-	vector<int> result = josephus(n, k);
+    //연산
+    vector<int> result = josephus(n, k);
 
-	//출력
-	cout << "<";
-	for (int i = 0; i < n - 1; i++) { //결과 벡터에 저장된 숫자 순서대로 하나씩 출력
-		cout << result[i] << ", ";
-	}
-	cout << result[n - 1] << ">";
+    //출력
+    cout << "<" << result[0];
+    for (int i = 1; i < n; i++) {
+        cout << ", " << result[i];
+    }
+    cout << ">";
 
-	return 0;
+    return 0;
 }
