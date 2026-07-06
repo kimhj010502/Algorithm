@@ -20,19 +20,7 @@ def solution(mats, park):
                 park_num[i][j] = 1
             
             answer = max(answer, park_num[i][j])
-            
-    for i in range(len(park)):
-        for j in range(len(park[i])):
-            print(park_num[i][j], end="\t")
-        print()
-    
-    print("\n\n")
-    for i in range(len(park)):
-        for j in range(len(park[i])):
-            print(park[i][j], end="\t")
-        print()
 
-        
     mats.sort(reverse=True)
     for i in range(len(mats)):
         if answer >= mats[i]:
